@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const blogs = [
   {
@@ -48,13 +49,19 @@ export default function BlogPost({ params }) {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
-      <p className="text-gray-600 mb-4">By {blog.author} on {blog.date}</p>
-      <p>{blog.description}</p>
-      <Link href="/blog">
-        <span className="text-blue-500 hover:underline cursor-pointer">Back to Blog</span>
-      </Link>
-    </div>
+    <>
+      <Head>
+        <title>{blog.title} | n! Blog</title>
+        <meta name="description" content={blog.description} />
+      </Head>
+      <div className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
+        <p className="text-gray-600 mb-4">By {blog.author} on {blog.date}</p>
+        <p>{blog.description}</p>
+        <Link href="/blog">
+          <span className="text-blue-500 hover:underline cursor-pointer">Back to Blog</span>
+        </Link>
+      </div>
+    </>
   );
 }
